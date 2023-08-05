@@ -1,9 +1,61 @@
 /*  Project Idea: Use the dataset to answer the following questions:
 
- Which book is the most expensive?
+1. Which book is the most expensive?
 
-What are the most popular books in each city?
+/* analysing the most expensive book.*/
+SELECT s.price,
+       b.title,
+FROM sales s
+JOIN books b
+ON s.sales_id = b.book_id
+ORDER BY 1 DESC;
 
-Which is the most bought book?
+Answer : The most expensive book is Software Estimation Demystifying the Black Art.
 
-Which book is least preferred by the readers? */
+2. What are the most popular books in each city?
+
+3. Which is the most bought book?
+
+/* analysing the most bought book.*/
+SELECT s.qnt_sold,
+       b.title
+FROM sales s
+JOIN books b
+ON s.sales_id = b.book_id
+GROUP BY 1, 2
+ORDER BY 1 DESC
+
+Answer : "Artificial Intelligence: Structures and Strategies for Complex Problem Solving"
+ 
+4.Which book is least preferred by the readers? */
+
+/* analysing the least book preferred by the readers.*/
+SELECT s.qnt_sold,
+       b.title
+FROM sales s
+JOIN books b
+ON s.sales_id = b.book_id
+GROUP BY 1, 2
+ORDER BY 1 ASC
+
+Answer : "Data Structures Using C and C++"
+ 
+
+/* analysing the City, Author and the publisher of the most expensive book.*/
+SELECT s.city,
+       s.price,
+       b.title,
+	   p.name
+	   /*a.first_name + ' ' + a.middle_name + ' ' + a.last_name */
+FROM sales s
+JOIN books b
+ON s.sales_id = b.book_id
+JOIN publishers P 
+ON b.publisher_id = p.publisher_id
+GROUP BY 4, 3, 1, 2
+ORDER BY 1,2 DESC
+
+
+ 
+
+
